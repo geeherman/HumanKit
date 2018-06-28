@@ -8,7 +8,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "HumanKit"
-  s.version      = "1.0.7"
+  s.version      = "1.0.8"
   s.summary      = "HumanKit by BioDigital Inc."
 #  s.description  = Here is the full SDK readme file text
     
@@ -66,7 +66,7 @@ Pod::Spec.new do |s|
   #
 
 #  s.source   = {:path => 'HumanKit.zip'}
-  s.source       = { :http => "http://geeherman.com/HumanKit.zip", :tag => "#{s.version}" }
+  s.source       = { :http => "http://geeherman.com/HumanKit.zip" }
 
 
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
