@@ -8,7 +8,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "HumanKit"
-  s.version      = "1.0.9"
+  s.version      = "1.0.3"
   s.summary      = "HumanKit by BioDigital Inc."
 #  s.description  = Here is the full SDK readme file text
     
@@ -66,7 +66,7 @@ Pod::Spec.new do |s|
   #
 
 #  s.source   = {:path => 'HumanKit.zip'}
-  s.source       = { :http => "http://geeherman.com/HumanKit.zip" }
+  s.source       = { :git => "URL", :tag => "#{s.version}" }
 
 
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
@@ -105,7 +105,7 @@ Pod::Spec.new do |s|
 
   # s.framework  = "SomeFramework"
   # s.frameworks = "SomeFramework", "AnotherFramework"
-    s.ios.vendored_frameworks = 'HumanKit/HumanKit.framework'
+    s.vendored_frameworks = 'HumanKit.framework'
 
   # s.library   = "iconv"
   # s.libraries = "iconv", "xml2"
