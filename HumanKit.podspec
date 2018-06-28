@@ -8,7 +8,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "HumanKit"
-  s.version      = "1.0.8"
+  s.version      = "1.0.9"
   s.summary      = "HumanKit by BioDigital Inc."
 #  s.description  = Here is the full SDK readme file text
     
@@ -105,7 +105,7 @@ Pod::Spec.new do |s|
 
   # s.framework  = "SomeFramework"
   # s.frameworks = "SomeFramework", "AnotherFramework"
-    s.ios.vendored_frameworks = 'HumanKit.framework'
+    s.ios.vendored_frameworks = 'HumanKit/HumanKit.framework'
 
   # s.library   = "iconv"
   # s.libraries = "iconv", "xml2"
