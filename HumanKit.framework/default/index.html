@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html
+  lang="en"
+  background-color=".96,.96,.96,1,.96,.96,.96,1"
+  background-color-stops="0,100"
+  background-color-gradient="radial">
+<head>
+<!-- humanWidget.default -->
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="X-UA-Compatible" content="chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+
+<link rel="shortcut icon" href="/favicon.ico">
+
+<title>BioDigital Human: Explore the Body in 3D!</title>
+
+<!--  Software and models Copyright 2018 BioDigital Systems, New York, NY. All rights reserved. This system is protected by copyright law and international treaties. Unauthorized reproduction, distribution, reverse engineering or sale of the software is strictly prohibited. -->
+
+<meta name="description" content="The BioDigital Human is a virtual 3D body that brings to life thousands of medically accurate anatomy objects and health conditions in an interactive Web-based platform">
+
+<meta name="keywords" content="BioDigital Human, virtual 3D body, learning anatomy, anatomy education, anatomy textbooks, health visualization, 3D anatomy, interactive anatomy, online anatomy, anatomy apps">
+
+<!-- CSS -->
+
+<!-- build:remove:production -->
+
+<!-- sources:css:widget-critical css/widget-critical.min.css -->
+<link href="css/widget-critical.css" rel="stylesheet" type="text/css">
+<!-- /sources -->
+
+<link-human-css></link-human-css>
+
+<!-- sources:css:widget css/widget.min.css -->
+<!--
+<link href="<%= engineCSS %>" rel="stylesheet" type="text/css"/>
+<link href="<%= uiCSS %>" rel="stylesheet" type="text/css"/>
+-->
+<link href="lib/bootstrap-3.1.1/css/tooltip.css" rel="stylesheet" type="text/css"/>
+<link href="css/widget.css" rel="stylesheet" type="text/css" ie-relink-css>
+<link href="css/default.css" rel="stylesheet" type="text/css" ie-relink-css>
+<!-- /sources -->
+
+<style rpc-styles></style>
+<!-- /build -->
+
+<!-- build:css:production inline css/widget-critical.min.css -->
+<!-- /build -->
+
+<!-- JS -->
+
+<!-- build:js:production inline scripts/human-background-4/human-background.min.js -->
+<script src="scripts/human-background-4/human-background.js"></script>
+<!-- /build -->
+
+<!-- Initialize background immediately -->
+<script>
+window.HumanBackground.input.setPriorities(['url', 'bookmark', 'content']);
+window.HumanBackground.init();
+</script>
+
+<!-- Check for non-refactored modules -->
+<script>
+(function () {
+  var module = null;
+
+  var _makeFullPath = function (id, gender) {
+    path = 'production/{0}Adult';
+    path = path.replace('{0}', gender);
+
+    return [path, id + '.json'].join('/');
+  };
+
+  var searchParams = {};
+
+  window.location.search.slice(1).split('&').forEach(function(pair) {
+    pair = pair.split('=');
+    searchParams[ pair[0] ] = pair[1];
+  });
+
+  if(searchParams.m) {
+    var id = searchParams.m;
+    var fullPath = id.indexOf('/') >= 0;
+
+    if(!fullPath) {
+      id = _makeFullPath(id, searchParams.s || 'male');
+    }
+
+    module = '/content/modules/' + id;
+  }
+
+  if (module) {
+    var xhr = new XMLHttpRequest();
+
+    xhr.open('get', module);
+    xhr.responseType = 'json';
+
+    xhr.onload = function () {
+
+      var response = xhr.response;
+
+      if (typeof response === 'string') {
+        response = window.JSON.parse(response);
+      }
+
+      if (!response.sceneGraph) {
+
+        var xhr2 = new XMLHttpRequest();
+
+        xhr2.open('post', '/ws/human-error');
+
+        xhr2.setRequestHeader(
+          'Content-type', 'application/x-www-form-urlencoded'
+        );
+
+        var data = {
+          category: 'INVALID_CONTENT_REDIRECT',
+          log: JSON.stringify({
+            embed: document.referrer,
+            url: window.location.toString()
+          }),
+          message: 'Attempt to load pre-refactor content into default widget. Redirected to bd-01.'
+        };
+
+        var dataStr = [];
+
+        for (var key in data) {
+          dataStr.push(key + '=' + window.encodeURIComponent(data[key]));
+        }
+
+        xhr2.send(dataStr.join('&'));
+
+        location = '/widgets/bd-01/' + location.search + location.hash;
+      }
+    }
+
+    xhr.send();
+  }
+})();
+</script>
+
+<!-- build:remove:production -->
+
+<!-- QA Environment Config, Exclude from widget.min.js -->
+<script defer src="environments/qa.js"></script>
+
+<!-- sources:js:widget scripts/widget.min.js -->
+
+<!-- Misc 3rd party libs -->
+
+<script defer src="lib/jquery/1.12.0/jquery.min.js"></script>
+
+<script defer src="lib/angularjs/1.3.15/angular.min.js"></script>
+<script defer src="lib/angularjs/1.3.15/angular-touch.min.js"></script>
+
+<script defer src="lib/jquery/jquery.mousewheel.js"></script>
+
+<script defer src="lib/ui-bootstrap-tooltip/ui-bootstrap-custom-tpls-1.3.2.js"></script>
+
+<script defer src="lib/modernizr.js"></script>
+<script defer src="lib/encoding.js"></script>
+<script defer src="lib/ga.js"></script>
+
+<!-- Production Environment Config -->
+<!--
+<script defer src="environments/production.js"></script>
+
+<script defer src="<%= engineJS %>"></script>
+<script defer src="<%= uiJS %>"></script>
+-->
+
+<script defer src="scripts/human-scene-20/human-scene.js"></script>
+
+<!-- Widget Lib -->
+<script defer src="scripts/widget/9.1.4/human-widget-9.1.4.js"></script>
+
+<!-- Widget Instance Config -->
+<script defer src="scripts/share.js"></script>
+
+<script defer src="scripts/engine-config.js"></script>
+<script defer src="scripts/config.js"></script>
+
+<script defer src="scripts/default.js"></script>
+
+<!-- /sources -->
+<!-- /build -->
+
+<!-- build:template:production
+<script defer src="scripts/widget.min.js?v=<%= time %>"></script>
+/build -->
+
+</head>
+<body
+  global-info
+  ng-class="{
+    fallback: !pass,
+    'fallback-tour': fallbackTour,
+    'no-fallback-tour': noFallbackTour,
+    embedded: embedded,
+    device: !!result.device,
+
+    'initial-display-enabled': widgetData.initialDisplay.enabled,
+
+    'audio-enabled': uiComponents.config.audio,
+    'info-enabled': infoEnabled,
+    'info-expanded': infoExpanded,
+    'timeline-enabled': (uiComponents.config.playPause || uiComponents.config.scrubber || (tour && uiComponents.config.tour) || uiComponents.config.bookmarkTour)
+  }"
+  ng-controller="MainController">
+
+<a
+  id="embed-logo"
+  class="initial-display-hide"
+  href="https://www.biodigital.com"
+  target="_blank"
+  ga-event="['BioDigital Logo', 'BioDigital Logo Clicked']"
+  ui-bd
+  ng-cloak>
+</a>
+
+<!-- Canvas Container -->
+<div id="container"
+  broadcast-user-interaction
+  capture-size>
+  <!-- Canvas providing WebGL context -->
+  <canvas id="theCanvas" class="canvasBody"></canvas>
+  <!-- Legacy element, engine still requires though -->
+  <canvas id="annotationCanvas" class="canvasBody"></canvas>
+</div>
+
+<human-load-progress ng-cloak ng-show="show" class="initial-display-hide">
+
+  <div
+    id="load-panel"
+    ng-show="!currentAssetType || currentAssetType === 'static'">
+      <div class="progress-indicator">
+        <span load-progress></span>
+      </div>
+
+      <div class="status-text">
+        <span load-status>Loading...</span>
+      </div>
+  </div>
+
+  <div
+    id="load-bar"
+    load-progress="bar"
+    ng-show="currentAssetType === 'dynamic'">
+  </div>
+
+</human-load-progress>
+
+<!-- Menu -->
+<div
+  ng-cloak
+  id="menu-toggle"
+  class="circular initial-display-hide"
+  toggle-element="#menu"
+  ga-event="['Expand Menu']"
+  ng-hide="widgetParams['ui-all'] === 'false'">...
+</div>
+
+<div
+  ng-cloak
+  id="menu"
+  class="initial-display-hide"
+  ng-class="{ 'ng-hide': smallWindow === undefined || (smallWindow && !uiComponents.config.menuExpand) }"
+  window-breakpoint="smallWindow = breakpoint <= 991; tooltipPlacement = smallWindow ? 'left' : 'right';">
+
+  <div
+    id="share-panel"
+    ng-show="uiComponents.config.share">
+
+    <div
+      id="share-toggle"
+      widget-icon="share-toggle"
+      toggle-element="share-modes"
+      ga-event="['Share 3D View', 'Share Opened/Closed']"
+      global-close
+      uib-tooltip="Share"
+      tooltip-placement="{{ tooltipPlacement }}"
+      tooltip-trigger="mouseenter click"
+      class="circular">
+    </div>
+
+    <share-modes
+      class="widget-panel ng-hide"
+      ng-class="tooltipPlacement">
+    </share-modes>
+  </div>
+
+  <human-camera-zoom-in
+    ng-show="show"
+    ga-event="['Navigation', 'Zoom In']"
+    uib-tooltip="Zoom In"
+    tooltip-placement="{{ tooltipPlacement }}"
+    class="circular">
+  </human-camera-zoom-in>
+
+  <human-camera-zoom-out
+    ng-show="show"
+    ga-event="['Navigation', 'Zoom Out']"
+    uib-tooltip="Zoom Out"
+    tooltip-placement="{{ tooltipPlacement }}"
+    class="circular">
+  </human-camera-zoom-out>
+
+  <human-camera-mode
+    ng-show="show"
+    ga-event="['Navigation', mode === 'orbit' ? 'Pan' : 'Rotate']"
+    uib-tooltip="{{ mode === 'orbit' ? 'Pan' : 'Orbit' }}"
+    tooltip-placement="{{ tooltipPlacement }}"
+    class="circular">
+  </human-camera-mode>
+
+  <human-camera-center
+    ng-show="show"
+    ga-event="['Navigation', 'Center']"
+    uib-tooltip="Center"
+    tooltip-placement="{{ tooltipPlacement }}"
+    class="circular">
+  </human-camera-center>
+
+  <div
+    id="scene-reset"
+    widget-icon="reset"
+    ng-show="uiComponents.config.reset"
+    ga-event="['Scene', 'Reset']"
+    uib-tooltip="Reset Scene"
+    tooltip-placement="{{ tooltipPlacement }}"
+    class="circular">
+  </div>
+
+  <human-window-link
+    ng-show="show"
+    ga-event="['New Window', 'Opened']"
+    uib-tooltip="View in a New Window"
+    tooltip-placement="{{ tooltipPlacement }}"
+    class="circular">
+  </human-window-link>
+
+  <human-fullscreen
+    ng-show="!result.device && show"
+    ga-event="['Fullscreen', mode === 'fullscreen' ? 'Closed' : 'Opened']"
+    uib-tooltip="{{ mode === 'fullscreen' ? 'Leave Fullscreen' : 'Fullscreen' }}"
+    tooltip-placement="{{ tooltipPlacement }}"
+    class="circular">
+  </human-fullscreen>
+
+  <div
+    widget-icon="help"
+    ng-show="uiComponents.config.help"
+    ga-event="['Help', 'Help Opened']"
+    uib-tooltip="Help"
+    tooltip-placement="{{ tooltipPlacement }}"
+    open-frame-modal="{{ '/help-navigation.html' + (!!result.device ? '?mode=touch-device' : ''); }}"
+    frame-modal-class="help"
+    class="circular">
+  </div>
+
+  <!-- Tools - Primary -->
+  <div
+    id="primary-tools"
+    ng-show="widgetParams['ui-tools-display'] === 'primary'">
+
+      <human-dissect
+        ng-show="show"
+        ga-event="['Customization Tools', 'Dissect']"
+        class="circular"
+        uib-tooltip="{{ info }}"
+        tooltip-placement="{{ tooltipPlacement }}">
+      </human-dissect>
+
+      <human-dissect-undo
+        ng-show="show"
+        ga-event="['Customization Tools', 'Undo Dissect']"
+        class="circular"
+        uib-tooltip="{{ info }}"
+        tooltip-placement="{{ tooltipPlacement }}">
+      </human-dissect-undo>
+
+      <human-xray
+        ng-show="show"
+        ga-event="['Customization Tools', 'X-Ray Mode']"
+        class="circular"
+        uib-tooltip="{{ info }}"
+        tooltip-placement="{{ tooltipPlacement }}">
+      </human-xray>
+
+      <human-isolate
+        ng-show="show"
+        ga-event="['Customization Tools', 'Isolate Mode']"
+        class="circular"
+        uib-tooltip="{{ info }}"
+        tooltip-placement="{{ tooltipPlacement }}">
+      </human-isolate>
+
+      <human-annotations
+        ng-show="show"
+        ga-event="['Customization Tools', 'Toggle Annotations']"
+        class="circular"
+        uib-tooltip="{{ info }}"
+        tooltip-placement="{{ tooltipPlacement }}">
+      </human-annotations>
+
+      <!-- Keeping last for now, out of the way of content -->
+      <div id="primary-cross-section">
+        <human-cross-section-toggle
+          ng-show="show"
+          ga-event="['Customization Tools', 'Cross Section']"
+          class="circular"
+          uib-tooltip="{{ info }}"
+          tooltip-placement="{{ tooltipPlacement }}"
+          tooltip-trigger="mouseenter click"
+          global-close>
+        </human-cross-section-toggle>
+
+        <human-cross-section
+          ng-class="tooltipPlacement"
+          class="ng-hide widget-panel">
+        </human-cross-section-controls>
+      </div>
+
+  </div>
+
+  <div
+    object-tree-display="toggle"
+    widget-icon="object-tree"
+    ga-event="['Anatomy Tree', 'Anatomy Tree Opened/Closed']"
+    uib-tooltip="Object Tree"
+    tooltip-placement="{{ tooltipPlacement }}"
+    ng-show="uiComponents.config.objectTree"
+    class="circular">
+  </div>
+
+  <div id="object-slider">
+
+    <div
+      widget-icon="object-slider"
+      ng-show="uiComponents.config.objectSlider"
+      ga-event="['Anatomy Slider']"
+      uib-tooltip="Object Slider"
+      tooltip-placement="{{ tooltipPlacement }}"
+      tooltip-trigger="mouseenter click"
+      toggle-element="#object-slider-panel"
+      global-close
+      class="circular">
+    </div>
+
+    <div
+      id="object-slider-panel"
+      class="widget-panel ng-hide"
+      ng-cloak
+      ng-class="tooltipPlacement">
+      <human-object-slider ng-cloak axis="x"></human-object-slider>
+    </div>
+
+  </div>
+
+  <!-- Tools - Secondary -->
+  <div
+    id="secondary-tools"
+    ng-show="widgetParams['ui-tools-display'] !== 'primary' && (uiComponents.config.dissect || uiComponents.config.crossSection || uiComponents.config.xray || uiComponents.config.isolate || uiComponents.config.annotations)">
+
+    <div
+      widget-icon="tools"
+      ga-event="['Customization Tools', 'Toolbar Opened/Closed']"
+      uib-tooltip="Tools"
+      tooltip-placement="{{ tooltipPlacement }}"
+      tooltip-trigger="mouseenter click"
+      toggle-element="#secondary-tools-panel"
+      global-close
+      class="circular">
+    </div>
+
+    <div
+      id="secondary-tools-panel"
+      class="widget-panel ng-hide"
+      ng-cloak
+      ng-class="tooltipPlacement">
+
+        <human-dissect
+          ng-show="show"
+          ga-event="['Customization Tools', 'Dissect']"
+          uib-tooltip="{{ info }}">
+        </human-dissect>
+
+        <human-dissect-undo
+          ng-show="show"
+          ga-event="['Customization Tools', 'Undo Dissect']"
+          uib-tooltip="{{ info }}">
+        </human-dissect-undo>
+
+        <human-xray
+          ng-show="show"
+          ga-event="['Customization Tools', 'X-Ray Mode']"
+          uib-tooltip="{{ info }}">
+        </human-xray>
+
+        <human-isolate
+          ng-show="show"
+          ga-event="['Customization Tools', 'Isolate Mode']"
+          uib-tooltip="{{ info }}">
+        </human-isolate>
+
+        <human-annotations
+          ng-show="show"
+          ga-event="['Customization Tools', 'Toggle Annotations']"
+          uib-tooltip="{{ info }}">
+        </human-annotations>
+
+        <human-cross-section-toggle
+          ng-show="show"
+          ga-event="['Customization Tools', 'Cross Section']"
+          uib-tooltip="{{ info }}"
+          tooltip-trigger="mouseenter click">
+        </human-cross-section-toggle>
+
+        <human-cross-section class="ng-hide"></human-cross-section>
+    </div>
+
+  </div>
+
+</div>
+
+<!-- Hotspots Container -->
+<human-hotspots
+  ng-cloak
+  class="initial-display-hide"
+  ga-event="['Hotspots', 'Hotspots Clicked']">
+</human-hotspots>
+
+<!-- Scene Object Hierarchy -->
+<human-object-tree
+  ng-cloak
+  class="ng-hide initial-display-hide"
+  ga-event="{ 'human-tree' : ['Anatomy Tree', 'Tree Clicks'] }"
+  ga-use-capture
+  draggable>
+  <drag-handle></drag-handle>
+  <button object-tree-display="off" class="close">&times;</button>
+</human-object-tree>
+
+<!-- Content Information -->
+<div id="info-panel" ng-cloak class="initial-display-hide">
+
+  <div human-info
+    ng-show="show"
+    ng-class="{ 'has-description': !!info.description }"
+    timeline-touch
+    ng-swipe-left="step(-1)"
+    ng-swipe-right="step(1)">
+
+    <h1
+      class="title"
+      expand-info
+      ga-event="['Description Panel', 'Description Panel Opened/Closed']"
+      bind-trusted-html="info.title">
+    </h1>
+
+    <div
+      class="info-expander"
+      expand-info
+      ga-event="['Description Panel', 'Description Panel Opened/Closed']">
+    </div>
+
+    <human-audio
+      ng-show="show"
+      ga-event="['Audio Playback', 'Audio ' + (states.ended ? 'Replayed' : (states.muted ? 'Unmuted' : 'Muted'))]"
+      ga-use-capture>
+    </human-audio>
+
+    <p class="description" ng-bind-html="info.description"></p>
+  </div>
+
+</div>
+
+<!-- Timeline Components -->
+<div id="timeline-components" ng-cloak class="initial-display-hide">
+
+  <human-scrubber
+    ng-show="show"
+    ga-event="{
+      '[play-pause-timeline]' : ['Tour &amp; Animation Navigation', 'Scrubber Played/Paused']
+    }">
+  </human-scrubber>
+
+  <human-play-pause
+    ng-show="show"
+    ga-event="['Tour &amp; Animation Navigation', 'Play/Pause Button Clicked']">
+  </human-play-pause>
+
+  <human-tour
+    ng-show="show"
+    ga-event="{
+      '[prev-next-chapter=prev]' : ['Tour &amp; Animation Navigation', 'Previous Chapter'],
+      '[prev-next-chapter=next]' : ['Tour &amp; Animation Navigation', 'Next Chapter']
+    }">
+  </human-tour>
+
+  <!-- Bookmark Tour (Honorary Timeline Component) -->
+  <human-bookmark-tour ng-show="show"></human-bookmark-tour>
+
+</div>
+
+<!-- Actions Tour -->
+<human-actions-tour ng-cloak ng-show="show">
+
+  <button actions-tour-prev></button>
+  <div actions-tour-title></div>
+  <button actions-tour-next></button>
+
+  <button actions-tour-automate></button>
+  <button actions-tour-reset></button>
+
+  <button toggle-mute-audio></button>
+
+</human-actions-tour>
+
+<!-- Cover Image -->
+<div id="image-container"
+  ng-cloak
+  background-image
+  size-background-image
+  class="initial-display-show"
+  ng-class="{
+    landscape: landscape,
+    portrait: portrait,
+    square: square,
+    cover: cover,
+    loading: loading,
+    'has-content': hasContent
+  }">
+</div>
+
+<!-- Initial Display -->
+<div
+  id="initial-display"
+  ng-cloak
+  ng-if="pass"
+  initial-display-class
+  initial-display="false"
+  class="initial-display-show"
+  ga-event="['Click to Interact', widgetParams['load-hint-hand'] ? 'Hand Hint' : 'Button']">
+    <button>Click to Interact in 3D</button>
+</div>
+
+<!-- Mousewheel Info -->
+<div
+  id="mousewheel-info"
+  mousewheel-info
+  ng-cloak>
+    <button>Use ctrl + scroll to zoom</button>
+</div>
+
+<!-- Generic Modal Container -->
+<frame-modal ng-cloak class="initial-display-hide"></frame-modal>
+
+<!-- Fallback Elements -->
+<div id="video-container"
+  ng-cloak
+  ng-show="show"
+  fallback-video>
+</div>
+
+<fallback-tour
+  ng-cloak
+  ng-if="!pass"
+  ng-show="show"
+  ng-swipe-left="step(1)"
+  ng-swipe-right="step(-1)"
+  ng-class="curAsset.type">
+</fallback-tour>
+
+<fail-module-info
+  ng-cloak
+  ng-if="!pass"
+  ng-show="moduleData && widgetParams['ui-panel'] === 'true'">
+</fail-module-info>
+
+<fail-message
+  ng-cloak
+  ng-if="!pass"
+  ng-hide="embedded || !fallbackTour && !noFallbackTour"
+  ng-class="{ mobile: !!result.device }">
+</fail-message>
+
+<module-error ng-cloak ng-show="show"></module-error>
+
+<!-- build:template:production
+<noscript id="widget-styles">
+  <link href="css/widget.min.css?v=<%= time %>" rel="stylesheet" type="text/css">
+</noscript>
+/build -->
+
+<!-- build:js:production inline scripts/load-widget-styles.js -->
+<!-- /build -->
+
+<!-- build:template:production
+<style rpc-styles></style>
+/build -->
+
+<script>
+(function () { // Immediately get annotation canvas context
+  var ac = document.getElementById('annotationCanvas');
+  var acContext = ac.getContext('2d');
+})();
+</script>
+
+</body>
+</html>

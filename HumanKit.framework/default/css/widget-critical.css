@@ -1,0 +1,213 @@
+/*---------------------------------------------
+	Reset
+*--------------------------------------------*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* guard against possible Angular flickering */
+
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak],
+.ng-cloak, .x-ng-cloak,
+.ng-hide:not(.ng-hide-animate) {
+  display: none !important;
+}
+
+ng\:form {
+  display: block;
+}
+
+html {
+  height: 100%;
+  width: 100%; /* For Android browsers */
+  overflow: hidden;
+  background-attachment: fixed;
+}
+
+body {
+	margin: 0px;
+  padding: 0px;
+  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+  font-size: 16px;
+  color: #fff;
+  overflow: hidden;
+}
+
+iframe {
+  border: 0;
+}
+
+img {
+  border: none;
+  vertical-align: middle;
+}
+
+textarea {
+  overflow: auto;
+}
+
+textarea:focus, input:focus, button:focus {
+  outline: 0;
+}
+
+ul {
+	list-style-type: none;
+}
+
+sub {
+  vertical-align: sub;
+  font-size: smaller;
+}
+
+*::-webkit-scrollbar {
+  height: 1.0ex;
+  width: 5px;
+  -webkit-border-radius: 0px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: rgba(100, 100, 100, 0.3);
+  -webkit-border-radius: 3px;
+  -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, .7);
+  opacity:0.5;
+}
+
+#container, #container > canvas {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  z-index: 0;
+}
+
+/* Initial Display Mode */
+
+body.initial-display-enabled .initial-display-hide {
+  display: none !important;
+}
+
+body:not(.initial-display-enabled) .initial-display-show {
+  display: none !important;
+}
+
+/* These elements need to be hidden initially */
+
+#menu-toggle, #info-panel, #mousewheel-info, frame-modal {
+  display: none;
+}
+
+/* Early styles for load progress indicator */
+
+#load-bar {
+  position: absolute;
+  bottom: 0;
+  height: 5px;
+  background-color: rgba(153, 0, 0, 0.75);
+}
+
+#load-panel {
+  position: absolute;
+  height: 120px;
+  padding: 15px 0 10px 0;
+  color: #fff;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 700;
+  background-color: #79818d;
+  border: 0;
+  border-radius: 10px;
+  box-shadow: 1px 1px 1px 0 #666;
+  opacity: .85;
+
+  /* Center out of the box */
+  left: 50%;
+  top: 50%;
+  width: 180px !important;
+  margin-left: -90px;
+  margin-top: -60px;
+}
+
+.bg-black #load-panel {
+  border: 1px solid rgba(255,255,255,.15);
+  box-shadow: none;
+}
+
+#load-panel .status-text {
+  padding: 5px 10px 0;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+#load-panel {
+  background: rgba(0, 0, 0, .45);
+  opacity: 1;
+}
+
+#load-panel .progress-indicator {
+  background: none;
+  text-align: center;
+  width: 100%;
+  height: 60px;
+  line-height: 60px;
+}
+
+#load-panel .progress-indicator > span {
+  display: inline-block;
+  width: 50px;
+  position: absolute;
+  margin-left: -25px;
+}
+
+#load-panel .progress-indicator:after {
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+}
+
+#load-panel .progress-indicator:after {
+  content: ' ';
+  margin: 0 auto;
+  font-size: 10px;
+  position: absolute;
+  margin-left: -28px;
+
+  border: 4px solid rgba(255, 255, 255, 0.45);
+  border-left-color: rgba(255,255,255,1);
+
+  transform: translateZ(0);
+  animation: load-progress 1.1s infinite linear;
+}
+
+@keyframes load-progress {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}

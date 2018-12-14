@@ -1,0 +1,147 @@
+/* Default Widget Specific Styles Here */
+
+.fade-out {
+  opacity: 0;
+}
+
+[widget-icon="share-toggle"]:after {
+  background-position: -160px 0;
+}
+
+/* Share Panel */
+
+#share-panel {
+  position: relative;
+}
+
+#share-toggle {
+  position: relative;
+}
+
+share-modes {
+  position: absolute;
+  top: 0;
+}
+
+share-modes.right {
+  left: 40px;
+}
+
+share-modes.left {
+  right: 40px;
+}
+
+share-modes li {
+  display: inline-block;
+  position: relative;
+  width: 28px;
+  height: 28px;
+  margin-right: 4px;
+
+  background-image: url('../img/share_sprite_28.png');
+  background-repeat: no-repeat;
+}
+
+share-modes li:last-child {
+  margin-right: 0;
+}
+
+share-modes li.link {
+  background-position: -224px 0;
+}
+
+share-modes li.email {
+  background-position: -336px 0;
+}
+
+share-modes li.embed {
+  background-position: -280px 0;
+}
+
+share-modes li.facebook {
+  background-position: 0 0;
+}
+
+share-modes li.twitter {
+  background-position: -56px 0;
+}
+
+share-modes li.googleplus {
+  background-position: -112px 0;
+}
+
+share-modes li.loading:after {
+  content: '';
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  width: 16px;
+  height: 16px;
+  display: block;
+  background-image: url('../img/loader-transparent.gif');
+}
+
+
+/* Share Frames */
+
+#frame-container.link iframe {
+  height: 210px;
+}
+
+#frame-container.email iframe {
+  height: 580px;
+}
+
+#frame-container.embed iframe {
+  height: 425px;
+}
+
+#frame-container.facebook iframe {
+  height: 325px;
+}
+
+@media (min-width: 500px) {
+
+  #frame-container.link iframe {
+    height: 180px;
+  }
+
+  #frame-container.embed iframe {
+    height: 350px;
+  }
+
+  #frame-container.facebook iframe {
+    height: 350px;
+  }
+
+}
+
+/* Overrides */
+
+body.bg-standard .annotationContainer .annotationTitle {
+  border-bottom: 1px solid #666;
+  color: #333;
+}
+
+body.bg-standard .annotationDescription {
+  color: #333;
+}
+
+body.bg-standard .annotationTitle h1 {
+  font-weight: bold;
+  text-shadow: none;
+}
+
+body.bg-standard .annotationWire {
+  border-top-color: #666;
+}
+
+/* TEMP: Hide object slider if we're not in the timeline */
+body:not([current-chapter]) [widget-icon="object-slider"] {
+  display: none !important;
+}
+
+/* Scene Reset */
+[widget-icon="reset"]:after {
+  background-position: -260px 0;
+}

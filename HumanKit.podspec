@@ -8,10 +8,9 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "HumanKit"
-  s.version      = "1.0.3"
+  s.version      = "1.0.7"
   s.summary      = "HumanKit by BioDigital Inc."
 #  s.description  = Here is the full SDK readme file text
-    
 
   s.homepage     = "http://developer.biodigital.com"
   # s.screenshots  = "www.example.com/screenshots_1.gif", "www.example.com/screenshots_2.gif"

@@ -1,0 +1,823 @@
+/* Human UI 5.0.2
+ *
+ * (c) 2015 BioDigital, Inc.
+ *
+ */
+ 
+/* Button */
+
+button {
+  display: inline-block;
+  height: 30px;
+  padding: 3px;
+  background-color: transparent;
+  color: #fff;
+  border: 1px solid transparent;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  border-color: #333;
+}
+
+button.tool {
+  padding: 6px;
+  width: 30px;
+}
+
+button.disabled {
+  opacity: .5 !important;
+  cursor: auto;
+  pointer-events: none;
+}
+
+button.tool.on {
+  background-color: #777;
+  border-color: #777;
+}
+
+button.tool:after {
+  content: '';
+  display: block;
+  width: 16px;
+  height: 16px;
+  opacity: .75;
+  background-image: url('../img/human-ui-icons.png');
+}
+
+button.tool:hover:after {
+  opacity: 1;
+}
+
+/* Panel */
+
+.human-panel {
+  color: #fff;
+  background-color: #0f1215;
+  padding: 3px 5px;
+  border-radius: 5px;
+}
+
+/* Slider */
+
+human-slider {
+  padding: 10px;
+  position: relative;
+  display: block;
+  opacity: .25;
+  background-color: #79818e;
+  border-radius: 3px;
+  border: 1px solid #333;
+}
+
+human-slider:hover {
+  opacity: 1;
+}
+
+human-slider .track {
+  position: relative;
+  width: 125px;
+  height: 5px;
+  border-radius: 10px;
+  background-color: #333;
+  cursor: pointer;
+}
+
+human-slider .progress {
+  position: absolute;
+  height: inherit;
+  border-radius: inherit;
+  background-color: transparent;
+  pointer-events: none;
+}
+
+human-slider .handle {
+  position: absolute;
+  height: 15px;
+  width: 6px;
+  left: 0%;
+  top: -5px;
+  margin-left: -3px;
+  background-color: #79818e;
+  border: 1px solid #333;
+  border-radius: 2px;
+}
+
+human-slider .progress-label {
+  display: block;
+  position: absolute;
+  width: 92px;
+  left: -38px;
+  top: -32px;
+  border-radius: 4px;
+  font-size: 11px;
+  line-height: 1.4;
+  padding: 3px 8px;
+  color: #fff;
+  text-align: center;
+  text-decoration: none;
+  background-color: #000;
+  z-index: 1030;
+}
+
+human-slider .progress-label:after {
+  display: block;
+  position: absolute;
+  content: '';
+  width: 0;
+  height: 0;
+  bottom: -12px;
+  left: 40px;
+  border: 6px solid transparent;
+  border-top-color: #000;
+  z-index: 1030;
+}
+
+/* Draggable */
+
+drag-handle {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 20px;
+  height: 20px;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+drag-handle:after {
+  content: '';
+  position: absolute;
+  display: block;
+  width: 0;
+  height: 0;
+  top: -20px;
+  border: 20px solid transparent;
+  border-left-color: #fff;
+  opacity: .1;
+}
+
+drag-handle:hover:after {
+  opacity: .25;
+}
+
+.tool.annotations:after {
+  background-position: -112px -32px;
+}
+
+/* Pan */
+
+human-camera-pan {
+  position: relative;
+  display: block;
+  width: 50px;
+  height: 50px;
+  opacity: .25;
+  background-color: #79818e;
+  border-radius: 3px;
+  border: 1px solid #333;
+  cursor: pointer;
+}
+
+human-camera-pan:hover {
+  opacity: 1;
+}
+
+[center-camera], [pan-camera] {
+  position: absolute;
+}
+
+[center-camera] {
+  top: 18px;
+  left: 18px;
+  height: 12px;
+  width: 12px;
+  background-color: #333;
+  border-radius: 6px;
+}
+
+[center-camera]:hover {
+  background-color: #fff;
+}
+
+[pan-camera]:after {
+  position: absolute;
+  display: block;
+  height: 0;
+  width: 0;
+  content: '';
+  border: 7px solid transparent;
+}
+
+[pan-camera=up], [pan-camera=down] {
+  width: 14px;
+  height: 7px;
+  left: 17px;
+}
+
+[pan-camera=right], [pan-camera=left] {
+  height: 14px;
+  width: 7px;
+  top: 17px;
+}
+
+[pan-camera=up] {
+  top: 3px;
+}
+
+[pan-camera=up]:after {
+  bottom: 0;
+  border-bottom-color: #333;  
+}
+
+[pan-camera=up]:hover:after {
+  border-bottom-color: #fff;  
+}
+
+[pan-camera=right] {
+  right: 3px;
+}
+
+[pan-camera=right]:after {
+  border-left-color: #333;
+}
+
+[pan-camera=right]:hover:after {
+  border-left-color: #fff;  
+}
+
+[pan-camera=down] {
+  bottom: 3px;
+}
+
+[pan-camera=down]:after {
+  border-top-color: #333;
+}
+
+[pan-camera=down]:hover:after {
+  border-top-color: #fff;  
+}
+
+[pan-camera=left] {
+  left: 3px;
+}
+
+[pan-camera=left]:after {
+  right: 0;
+  border-right-color: #333;
+}
+
+[pan-camera=left]:hover:after {
+  border-right-color: #fff;  
+}
+
+/* Zoom */
+
+human-camera-zoom {
+  position: relative;
+  display: block;
+  width: 50px;
+  height: 25px;
+  opacity: .25;
+  background-color: #79818e;
+  border-radius: 3px;
+  border: 1px solid #333;
+  cursor: pointer;
+}
+
+human-camera-zoom:hover {
+  opacity: 1;
+}
+
+human-camera-zoom > * {
+  width: 50%;
+  height: inherit;
+  line-height: 20px;
+  float: left;
+  text-align: center;
+  font-weight: 900;
+  font-size: 18px;
+  color: #333;
+  opacity: 1;
+}
+
+human-camera-zoom > *:hover {
+  color: #fff;
+}
+
+human-cross-section {
+  font-size: 10px;
+}
+
+human-cross-section > * {
+  float: left;
+}
+
+human-cross-section .controls {
+  position: relative;
+  padding-left: 5px;
+}
+
+human-cross-section .controls > * {
+  float: left;
+}
+
+human-cross-section human-slider {
+  padding: 12px;
+  opacity: .75;
+  background-color: transparent;
+  border: none;
+}
+
+human-cross-section human-slider:hover {
+  opacity: 1;
+}
+
+human-cross-section human-slider .track {
+  background-color: #424549;
+}
+
+human-cross-section human-slider .track:hover .handle {
+  background-color: #990000;
+  border-color: #990000;
+}
+
+human-cross-section human-slider .handle {
+  border-color: #79818e;
+}
+
+human-cross-section .view {
+  position: absolute;
+  left: 50%;
+  bottom: -2px;
+  margin-left: -60px;
+  width: 120px;
+  text-align: center;
+}
+
+/* Buttons */
+
+.tool.cross-section:after {
+  background-position: -80px -64px;
+}
+
+.tool[cycle-section-plane]:after {
+  background-position: -80px -80px;
+}
+
+.tool[reset-section-plane]:after {
+  background-position: -16px -16px;
+}
+
+.tool.dissect:after {
+  background-position: -80px -96px;
+}
+
+.tool.dissect-undo:after {
+  background-position: -16px -64px;
+}
+
+human-info-panel {
+  position: absolute;
+  width: 330px;
+  max-width: 85%;
+  max-height: 450px;
+  padding: 15px;
+  line-height: 1.5em;
+  border: none;
+  border-radius: 4px;
+  background-color: transparent;
+  color: #fff;
+  z-index: 200;
+}
+
+human-info-panel a,
+human-info-panel a:hover {
+  color: #fff;
+}
+
+human-info-panel .title {
+  margin-top: 0px;
+  font-size: 19px;
+  line-height: 30px;
+  border-bottom: 1px solid #fff;
+  margin-bottom: 10px;
+  font-weight: 400;
+}
+
+human-info-panel .description {
+  font-size: 14px;
+  line-height: 21px;
+  overflow-y: auto;
+}
+
+human-load-progress {
+  position: absolute;
+  width: 280px;
+  height: 120px;
+  padding: 15px 0 10px 0;
+  color: #fff;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 700;
+  background-color: #79818d;
+  border: 0;
+  border-radius: 10px;
+  box-shadow: 1px 1px 1px 0 #666;
+  opacity: .85;
+  z-index: 300;
+  
+  /* center out of the box */
+  left: 50%; 
+  top: 50%;
+  margin-left: -140px;
+  margin-top: -60px;
+}
+
+human-load-progress .progress-indicator {
+  width: 60px;
+  height: 60px;
+  line-height: 60px;
+  margin: auto;
+  background-image: url('../img/circular-loader.gif');
+}
+
+human-load-progress .status-text {
+  padding-top: 15px;
+}
+
+/* Audio Mute / Replay Button */
+
+[mute-replay-audio],
+[mute-replay-audio]:hover {
+  border-color: #fff;
+}
+
+[mute-replay-audio]:after {
+  background-position: -112px -128px;
+}
+
+[mute-replay-audio].muted:after {
+  background-position: -112px -144px;
+}
+
+[mute-replay-audio].ended:after {
+  background-position: -16px -16px !important;
+}
+
+.tool.xray:after {
+  background-position: -48px -32px;
+}
+
+.tool.isolate:after {
+  background-position: -48px -48px;
+}
+
+object-tree human-tree li.collapsed > [collapse] {
+  background-position: -336px -16px;
+}
+
+object-tree human-tree li.collapsed.anatomy-enabled > [collapse] {
+  background-position: -336px -32px;
+}
+
+object-tree human-tree li.anatomy-enabled > [collapse] {
+  background-position: -336px -48px;
+}
+
+object-tree human-tree li > [collapse] {
+  background-position: -336px -64px;
+}
+
+object-tree human-tree .anatomy-check-icon {
+  display: inline-block;
+  width: 32px;
+  height: 16px;
+  background-image: url('../img/human-ui-icons.png');
+  vertical-align: middle;
+  margin-right: 2px;
+  padding: 0px;
+  background-position: -304px -16px;
+}
+
+object-tree human-tree li.anatomy-enabled > a > .anatomy-check-icon {
+  background-position: -304px -48px;
+}
+
+object-tree human-tree li.anatomy-enabled > a {
+  color: #fff;
+}
+
+object-tree human-tree li.anatomy-enabled.anatomy-selected > a {
+  background-color: #3c4249;
+}
+
+/* Play / Pause */
+
+[play-pause-timeline] {
+  display: block;
+  position: relative;
+  width: 15px;
+  height: 20px;
+  padding: 0;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+[play-pause-timeline]:after {
+  display: block;
+  position: absolute;
+  content: '';
+  width: 0;
+  height: 0px;
+  top: 2px;
+  border-top: 8px solid transparent;
+  border-bottom: 8px solid transparent;
+  border-left: 10px solid #eee;
+}
+
+[play-pause-timeline].playing:after {
+  height: 16px;
+  width: 5px;
+  top: 3px;
+  left: -2px;
+  border-top: none;
+  border-bottom: none;
+  border-left: 4px solid #eee;
+  border-right: 4px solid #eee;
+}
+
+human-play-pause {
+  width: 50px;
+  height: 50px;
+
+  background-color: rgba(0,0,0,0.2);
+  border: 1px solid rgba(255,255,255,0.25);
+  border-radius: 5px;
+}
+
+human-play-pause [play-pause-timeline] {
+  margin: 0;
+  width: inherit;
+  height: inherit;
+}
+
+human-play-pause [play-pause-timeline]:after {
+  top: 15px;
+  left: 20px;
+}
+
+human-play-pause [play-pause-timeline].playing:after {
+  top: 15px;
+  left: 17px;
+}
+
+/* Scrubber */
+
+human-scrubber {
+  width: 500px;
+  height: 30px;
+  padding: 0 5px;
+  line-height: 30px;
+  background-color: rgba(0,0,0,0.2);
+  border: 1px solid rgba(255,255,255,0.25);
+  border-radius: 5px;
+}
+
+human-scrubber:hover {
+  border-color: rgba(255,255,255,0.5);
+}
+
+human-scrubber.chapters {
+  height: 40px;
+}
+
+human-scrubber > * {
+  float: left;
+  margin-left: 10px;
+}
+
+human-scrubber [play-pause-timeline] {
+  margin-top: 4px;
+}
+
+human-scrubber human-slider {
+  width: 440px;
+  padding: 0;
+  opacity: 1;
+  background-color: transparent;
+  border: none;
+}
+
+human-scrubber human-slider .track {
+  width: 100%;
+  margin-top: 10px;
+  height: 8px;
+  border-radius: 8px;
+  background-color: #666;
+}
+
+human-scrubber human-slider .progress {
+  background-color: #b50000;
+}
+
+human-scrubber human-slider .handle {
+  width: 16px;
+  height: 16px;
+  top: -4px;
+  margin-left: -8px;
+  border-radius: 16px;
+  background-color: #eee;
+  border: none;
+}
+
+human-scrubber human-chapters {
+  position: absolute;
+  height: 10px;
+  width: 440px;
+  left: 40px;
+  bottom: 3px;
+  margin: 0;
+}
+
+human-scrubber human-chapters .chapter {
+  display: block;
+  position: absolute;
+  padding: 0;
+  background-color: transparent;
+  border: none;
+  width: 16px;
+  height: 10px;
+  font-size: 11px;
+  line-height: 10px;
+  margin-left: -8px;
+  text-align: center;
+  color: rgba(255,255,255,0.75);
+  cursor: pointer;
+}
+
+human-scrubber human-chapters .chapter:after {
+  position: absolute;
+  content: '';
+  display: block;
+  width: 0;
+  height: 16px;
+  bottom: 13px;
+  left: 7px;
+  border-left: 1px solid rgba(255,255,255,0.25);
+}
+
+human-scrubber human-chapters .chapter:hover:after {
+  border-left-color: rgba(255,255,255,0.5);
+}
+
+human-scrubber human-chapters .tooltip {
+  font-size: 11px;
+}
+
+/* Prev / Nex Chapter */
+
+[prev-next-chapter] {
+	display: inline-block;
+  height: 34px;
+  width: 34px;
+  opacity: .5;
+	padding: 5px;
+	cursor: pointer;
+	background-color: rgb(33,38,43);
+  border: none;
+}
+
+[prev-next-chapter]:hover,
+[prev-next-chapter]:active {
+	opacity: 1;
+}
+
+[prev-next-chapter].disabled {
+  cursor: default;
+}
+
+[prev-next-chapter].disabled:after {
+  opacity: .1 !important;
+}
+
+[prev-next-chapter]:after {
+	content: '';
+	display: block;
+	height: 16px;
+	width: 16px;
+  margin: 0 auto;
+	background-image: url('../img/human-ui-icons.png');
+}
+
+[prev-next-chapter=prev]:after {
+  background-position: -16px -96px;
+}
+
+[prev-next-chapter=next]:after {
+  background-position: -16px -80px;
+}
+
+/* Tour */
+
+human-tour > div > * {
+  display: inline-block;
+  vertical-align: middle;
+  height: 34px;
+}
+
+human-tour human-chapters .chapter {
+  width: 34px;
+  height: inherit;
+  border: none;
+  border-radius: 0;
+  background-color: rgb(33,38,43);
+  opacity: .5;
+}
+
+human-tour [prev-next-chapter="prev"] {
+  border-radius: 5px 0 0 5px;
+}
+
+human-tour [prev-next-chapter="next"] {
+  border-radius: 0 5px 5px 0;
+}
+
+human-tour [prev-next-chapter]:hover,
+human-tour [prev-next-chapter]:active,
+human-tour human-chapters .chapter:hover {
+  opacity: .75;
+}
+
+human-tour human-chapters .chapter.on {
+  opacity: 1;
+}
+
+human-tour::-moz-selection,
+human-tour::selection {
+	background: none;
+}
+
+human-tree {
+  display: block;
+  overflow-y: auto;
+}
+
+human-tree ul.animating {
+  -webkit-transition: height 0.35s;
+          transition: height 0.35s;
+}
+
+human-tree li {
+  margin-left: 15px;
+  border-bottom: 1px solid #36383E;
+  overflow: hidden;
+  clear: both;
+}
+
+human-tree li.tree-leaf {
+  padding-left: 10px; /* compensate for no collapse toggle */
+}
+
+human-tree [collapse] {
+  display: block;
+  float: left;
+  width: 16px;
+  height: 16px;
+  vertical-align: middle;
+  margin-top: 4px;
+  background-image: url('../img/human-ui-icons.png');
+}
+
+human-tree li > [collapse] {
+  background-position: -336px -48px;
+}
+
+human-tree li.collapsed > [collapse] {
+  background-position: -336px -32px;
+}
+
+human-tree li:not(.collapsed) > ul {
+  border-top: 1px solid #36383E;
+}
+
+human-tree li:not(.collapsed) > ul > li:last-child {
+  border-bottom-color: transparent;
+}
+
+human-tree .tree-item {
+  display: block;
+  padding: 0px;
+  color: #BBB;
+  font-size: 12px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  vertical-align: middle;
+  white-space: nowrap;
+  height: 19px;
+  line-height: 19px;
+  margin: 2px 0px;
+  text-decoration: none;
+}

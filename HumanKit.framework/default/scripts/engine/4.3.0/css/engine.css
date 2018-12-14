@@ -1,0 +1,454 @@
+/* ARROWS */
+.arrow-up {
+    display: inline-block;
+    margin: auto 6px 1px 6px;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 5px 6px 5px;
+    border-color: transparent transparent #fff transparent;
+    opacity: 0.5;
+}
+.arrow-down {
+    display: inline-block;
+    margin: auto 6px 0px 6px;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 6px 5px 0 5px;
+    border-color: #fff transparent transparent transparent;
+    opacity: 0.5;
+}
+
+.arrow-down:hover, .arrow-up:hover {
+  opacity: 0.75;
+}
+
+/* LABELS */
+.label-container {
+    position: absolute;
+    z-index: 101;
+    background-color: rgba(0,0,0,0.75);
+    color: #fff;
+    border: 0px;
+    border-radius: 4px;
+    padding: 0px;
+    font-family: Arial, serif;
+    font-size: 12px;
+    z-index: 1001;
+}
+
+.label-container.inverse {
+    background-color: rgba(255,255,255,0.75);
+    color: #333;
+}
+
+ /* label on the right of the element */
+ /*
+.label-container.right:after {
+	right: 100%;
+	top: 12px;
+	border: solid transparent;
+	content: " ";
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
+	border-right-color: rgba(0,0,0,0.75);
+  border-width: 5px;
+  margin-top: -5px;
+}
+*/
+ /* label on the left of the element */
+  /*
+.label-container.left:after {
+	left: 100%;
+	top: 12px;
+	border: solid transparent;
+	content: " ";
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
+	border-left-color: rgba(0,0,0,0.75);
+	border-width: 4px;
+	margin-top: -4px;
+}
+*/
+/* label above the element */
+/*
+.label-container.top:after {
+  top: 100%;
+  left: 50%;
+  border: solid transparent;
+  content: " ";
+  height: 0;
+  width: 0;
+  position: absolute;
+  pointer-events: none;
+  border-top-color: rgba(0,0,0,0.75);
+  border-width: 4px;
+  margin-left: -4px;
+}
+*/
+/* label below the element */
+ /*
+.label-container.bottom:after {
+  bottom: 100%;
+  left: 50%;
+  border: solid transparent;
+  content: " ";
+  height: 0;
+  width: 0;
+  position: absolute;
+  pointer-events: none;
+  border-bottom-color: rgba(0,0,0,0.75);
+  border-width: 4px;
+  margin-left: -4px;
+}
+*/
+.label-container [class*="icon-"] {
+  display: inline-block;
+  width: 22px;
+  height: 22px;
+  line-height: 0;
+  vertical-align: middle;
+  background-image: url("../img/sprite_22x22.png");
+  background-repeat: no-repeat;
+  margin-top: -1px;
+  opacity: 0.75;
+  margin-right: 5px;
+}
+
+.label-container.inverse [class*="icon-"] {
+  background-image: url("../img/sprite_22x22_black.png");
+}
+
+.label-container [class*="icon-"] + [class*="icon-"] {
+  margin-right: 0px;
+}
+
+.label-container [class*="icon-"]:hover {
+  opacity: 1.0;
+}
+
+.label-container .icon-speaker {
+  background-position: 0 0;
+}
+.label-container .icon-close {
+  background-position: -22px 0;
+  margin: 0;
+  margin-top: -1px;
+  border-left: 1px solid #444;
+}
+.label-container .icon-collapse {
+  background-position: -66px 0;
+  margin: 0;
+  margin-top: -1px;
+  border-left: 1px solid #444;
+}
+.label-container .icon-expand {
+  background-position: -88px 0;
+  margin: 0;
+  margin-top: -1px;
+  border-left: 1px solid #444;
+}
+
+.label-container-header > span {
+  height: 22px;
+  line-height: 22px;
+  display: inline-block;
+}
+
+.label-container.right .label-container-header > span {
+  padding: 0 10px 0 10px;
+}
+.label-container.left .label-container-header > span {
+  padding: 0 10px 0 10px;
+}
+
+.label-container .options {
+    display: none;
+    padding: 3px;
+    list-style-type: none;
+    border-top: 1px solid #444;
+    margin: 0;
+    color: #fff;
+    font-size: 12px;
+}
+.label-container .options li {
+  padding: 5px;
+  color: #ccc;
+}
+.label-container .options li:hover {
+  color: #fff;
+}
+.label-container .options li:not(:last-child) {
+
+}
+
+/* ANNOTATIONS */
+.annotationPin {
+    position: absolute;
+    width: 0;
+    height: 0;
+    padding: 4px;
+    margin-left: -5px;
+    margin-top: -5px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #ccc;
+    border-radius: 50%;
+    background-color: #fff;
+    z-index: 125;
+}
+
+.annotationPin:after {
+    content: '';
+    display: block;
+    width: 4px;
+    height: 4px;
+    margin-left: -2px;
+    margin-top: -2px;
+    background-color: #990000;
+    border-radius: 50%;
+}
+
+/*  Annotation Wires */
+
+.annotationWire {
+    position: absolute;
+    height: 0;
+    border-top-width: 1px;
+    border-top-style: solid;
+    border-top-color: #ccc;
+    z-index: 124;
+    -webkit-transform-origin: 0 0;
+    -moz-transform-origin: 0 0;
+    -ms-transform-origin: 0 0;
+    -o-transform-origin: 0 0;
+    transform-origin: 0 0;
+}
+
+.annotationContainer.left + .annotationWire {
+    margin-top: -1px; /* Correct for rotation rendering issue */
+}
+
+/*  Annotation Labels */
+
+.annotationContainer {
+  box-sizing: border-box;
+  position: absolute;
+  font-family: Arial, sans-serif;
+  font-size: 12px;
+  min-width: 100px;
+  max-width: 200px;
+  color: rgb(238, 238, 238);
+  text-shadow: rgb(56, 61, 68) 1px 1px 1px;
+  z-index: 124;
+}
+
+.annotationContainer * {
+    box-sizing: border-box;
+}
+
+.annotationContainer.draggable:hover {
+    cursor: move;
+}
+/*  Annotation Labels: Edit State */
+/*.annotationContainer.editable:hover,*/
+.annotationContainer.editing {
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+/*.annotationContainer.editable:hover .annotationTitle,*/
+.annotationContainer.editing .annotationTitle
+{
+    padding: 5px;
+    border-radius: 4px 4px 0px 0px;
+}
+.annotationContainer.editing input,
+.annotationContainer.editing textarea {
+  color: #dddddd;
+  border: none;
+  margin-top: 2px;
+  margin-left: 2px;
+  margin-right: 25px; /* account for buttons */
+}
+.annotationContainer.editing input:focus,
+.annotationContainer.editing textarea:focus {
+    color: #ffffff;
+}
+.annotationContainer:not(.editing) input,
+.annotationContainer:not(.editing) textarea,
+.annotationContainer.editing h1,
+.annotationContainer.editing p {
+  display: none;
+}
+
+.annotationContainer .annotationSave {
+    display: none;
+}
+.annotationContainer .annotationDelete {
+    visibility: hidden;
+}
+.annotationContainer.editable.editing .annotationSave {
+     display: inline-block;
+}
+.annotationContainer.editable.editing .annotationDelete {
+     display: none;
+}
+.annotationContainer.editable:not(.editing):hover .annotationDelete {
+    visibility: visible;
+    top: -5px;
+}
+
+.annotationTitle {
+  width: 100%;
+  line-height: 18px;
+  padding-top: 4px;
+  padding-top: 1px;
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+  border-bottom-color: #ccc;
+  padding-left: 5px;
+}
+
+.annotationTitle > h1, .annotationTitle > input {
+  min-height: 18px;
+}
+
+.annotationTitle h1 {
+  font-size: 14px;
+  display: inline-block;
+  /* constrain to label max-width - annotationDelete outer-width */
+  max-width: 167px;
+  margin: 1px;
+  margin-right: 30px; /* account for buttons */
+  padding: 0px;
+}
+
+/* Annotation edit buttons */
+.annotationDelete,
+.annotationSave {
+  position: absolute;
+  top: 1px;
+  right: 1px;
+  box-sizing: initial;
+  display: inline-block;
+  float: right;
+  width: 22px;
+  height: 22px;
+  padding: 2px;
+  border: none;
+  border-radius: 3px;
+  margin: 0;
+  background: none;
+  cursor: pointer;
+}
+
+.annotationDelete:after,
+.annotationSave:after {
+    content: ' ';
+    display: block;
+    width: inherit;
+    height: inherit;
+    background-image: url("../img/sprite_22x22.png");
+    background-repeat: no-repeat;
+}
+
+.annotationDelete:after {
+    background-position: -132px 0;
+}
+
+.annotationSave:after {
+    background-position: -220px 0;
+}
+
+.annotationDelete:hover,
+.annotationDelete:focus,
+.annotationSave:hover,
+.annotationSave:focus {
+  background-color: rgba(255,255,255, .3);
+}
+
+.annotationDescription {
+  padding: 5px;
+}
+
+.annotationDescription > *::-webkit-scrollbar {
+  height: 1.0ex; /* horizontal scrollbar */
+  width: 3px; /* vertical scrollbar */
+  -webkit-border-radius: 0px;
+}
+
+.annotationDescription > *::-webkit-scrollbar-thumb {
+  opacity: 0.35;
+  background: rgba(100,100,100,0.3);
+  -webkit-border-radius: 3px;
+  -webkit-box-shadow: 0 1px 2px rgba(0,0,0,0.7);
+}
+
+.annotationDescription > p {
+  max-height: 100px;
+  overflow: auto;
+  margin: 1px;
+  padding: 0px;
+}
+
+.annotationContainer input,
+.annotationContainer textarea {
+  color: inherit;
+  font-family: inherit;
+  font-size: inherit;
+  margin: 0;
+  padding: 1px;
+  border-width: 1px;
+  border-style: solid;
+  border-color: rgba(200,200,200,0.2);
+  border-radius: 3px;
+  background: none;
+}
+
+.annotationContainer input:focus,
+.annotationContainer textarea:focus {
+  outline-width: 1px;
+  outline-style: dotted;
+  outline-color: transparent;/*rgba(255,255,109, 0.75);*/
+}
+
+
+/* Annoyingly, these selectors need to be defined separately */
+.annotationContainer ::-webkit-input-placeholder {
+    color: #fff;
+    opacity: 1.0;
+}
+
+.annotationContainer ::-moz-placeholder {
+    color: #fff;
+    opacity: 1.0;
+}
+
+.annotationContainer :-moz-placeholder {
+    color: #fff;
+    opacity: 1.0;
+}
+
+.annotationContainer :-ms-input-placeholder {
+    color: #fff;
+    opacity: 1.0;
+}
+
+.annotationContainer input:hover,
+.annotationContainer textarea:hover,
+.annotationContainer input:focus,
+.annotationContainer textarea:focus {
+    /*background-color: rgba(255,255,255, .1);*/
+}
+
+.annotationContainer textarea {
+    width: 100%;
+    min-height: 50px;
+    max-height: 100px;
+    resize: none;
+}
